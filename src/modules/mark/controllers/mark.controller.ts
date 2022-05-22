@@ -22,4 +22,9 @@ export class MarkController {
     async test3(): Promise<any> {
         return await this.markService.automatingSign();
     }
+
+    @Get('text-extraction-free-or-not')
+    async test4(): Promise<any> {
+        return await this.markService.pdfTronTest();
+    }
 }
