@@ -1,0 +1,8 @@
++ Chữ ký nháy:
+
+	+ Chữ ký nháy nằm phía dưới từng trang văn bản: Do người soản thảo hoặc người kiểm tra rà soát văn bản
+	+ Chữ ký chốt nội dung: ở dòng nội dung cuối cùng của văn bản, do người sản thảo đoạn nội dung đó
+	+ Chữ ký tại phần chức danh người có thẩm quyền hoặc tại nơi nhận: người kiểm tra văn bản
+
++ Chữ ký chính thức: của các đại diện vào văn bản điều ước, ghi rõ họ tên người ký (đóng dấu cũng được) 
+	

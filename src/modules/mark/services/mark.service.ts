@@ -595,62 +595,7 @@ export class MarkService {
         fs.writeFileSync("src/public/pdfs/mark/test-modified-signed.pdf", modifiedPdfBytes)
     }
 
-    async pdfTronTestUtil(): Promise<any> {
-        const doc = await PDFNet.PDFDoc.createFromFilePath("src/public/pdfs/toeic.hust.pdf")
-        const numOfPages = await doc.getPageCount()
-
-        let res = []
-        let titles = ['TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI', 'Hanoi University Of Science And Technology', 'CHỨNG CHỈ TIẾNG ANH', 'HUST ENGLISH LANGUAGE CERTIFICATE', '(HUSTEC)', 'Mr/Miss:', 'Date of Birth:', 'Reading:', 'Listening:', 'Full:', 'Test date:', 'Valid date:']
-        for (let title of titles) {
-            let positionObjResultPerTitle = []
-            for (let page_num = 1; page_num <= numOfPages; page_num++) {
-                const page = await doc.getPage(page_num);
-                const txt = await PDFNet.TextExtractor.create();
-                const rect = await page.getCropBox();
-                
-                txt.begin(page, rect)
-                let line = await txt.getFirstLine();
-                for (; (await line.isValid()); line = (await line.getNextLine())) {
-                    for (let word = await line.getFirstWord(); (await line.getNextLine());) {
-                        let wordByString = await word.getString()
-                        console.log(wordByString)
-                        let check = true
-                        if (wordByString == title.split(" ")[0]) {
-                            let coordinate = await word.getQuad()
-                            let copiedWord = word
-                            let wordArr = title.split(" ")
-                            let nextWord = word
-                            for (let w = 1; w < wordArr.length; w++) {
-                                nextWord = await nextWord.getNextWord()
-                                if (await nextWord.getString() != wordArr[w]) {
-                                    check = false;
-                                    break
-                                }
-                            }
-
-                            if (check) {
-                                positionObjResultPerTitle.push(coordinate)
-                                word = await nextWord.getNextWord()
-                            } else {
-                                word = (await word.getNextWord())
-                            }
-
-                        } else {
-                            word = (await word.getNextWord())
-                        }
-                    }
-                }
-            }
-            res.push(positionObjResultPerTitle)
-        }
-        console.log(res)
-    }
-
-    async pdfTronTest(): Promise<any> {
-        for (let i = 0; i < 1; i++) {
-            PDFNet.runWithCleanup(this.pdfTronTestUtil, 'demo:1653045355329:7b84cbd6030000000099af23466ac703d41dac56db8fa63483a8329955')
-        }
-    }
+    
 
     async extractingTextUtil(filePath: string): Promise<any> {
         const doc = await PDFNet.PDFDoc.createFromFilePath(filePath)

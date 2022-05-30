@@ -34,7 +34,6 @@ export class Mark {
 
     @Prop({})
     note: string;
-
 }
 
 export const MarkSchema = SchemaFactory.createForClass(Mark).plugin(softDeletePlugin);
